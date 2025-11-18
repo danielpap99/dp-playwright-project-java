@@ -2,7 +2,7 @@ Automation Practice Project using Playwright
 
 This repository contains automated test scripts written in Java using Playwright. The tests are designed to practice and improve my skills in test automation, focusing on POM and cross-browser compatibility. Created by Daniel Pap - https://www.linkedin.com/in/danielpap1999/
 
-Technologies Used
+Technologies Used;
 Java – Programming language
 Playwright – Automation framework
 Maven – Automation tool
