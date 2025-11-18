@@ -1,0 +1,1 @@
+This repository contains automated test scripts written in C# using the NUnit framework and Selenium WebDriver. The tests are designed to practice and improve my skills in test automation, focusing on Page Object Model and cross-browser compatibility. Created by Daniel Pap - https://github.com/danielpap99 - https://www.linkedin.com/in/danielpap1999/
