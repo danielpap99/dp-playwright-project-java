@@ -1,24 +1,19 @@
-package Playwright.project.FlightBooker.tests;
+package Playwright.project.SwagLabs.tests;
 
 import com.microsoft.playwright.*;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Tag;
-import com.microsoft.playwright.Page;
-import Playwright.project.FlightBooker.pages.FlightsPage;
+import org.junit.jupiter.api.*;
+import Playwright.project.SwagLabs.pages.LoginPage;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 
-public class OneWayTrips {
+public class LoginTests {
 
     private static Playwright playwright;
     private static Browser browser;
     private static BrowserContext browserContext;
     Page page;
-    FlightsPage flightsPage;
+    LoginPage loginPage;
 
     @BeforeAll
     public static void SetUpBrowser() {
@@ -40,8 +35,8 @@ public class OneWayTrips {
     @BeforeEach
     public void setUp() {
         page = browserContext.newPage();
-        page.navigate("https://rahulshettyacademy.com/dropdownsPractise/#");
-        flightsPage = new FlightsPage(page);
+        page.navigate("https://www.saucedemo.com/");
+        loginPage = new LoginPage(page);
     }
 
     @AfterAll
@@ -54,10 +49,12 @@ public class OneWayTrips {
     @Tag("Smoke")
     void mainPageLoadsCorrectly() {
 
-        assertTrue(flightsPage.departureCityIsVisible(), "Departure City field is visible on screen");
-        assertTrue(flightsPage.arrivalCityIsVisible(),  "Arrival City field is visible on screen");
-        assertTrue(flightsPage.submitButtonIsVisible(), "Submit button is visible on screen");
+        loginPage.successfullyLogin();
+
+        assertTrue(loginPage.shoppingCartIconIsVisible(), "shopping cart is visible on screen");
+        assertTrue(loginPage.headerIsVisible(),  "the header Swag Labs is visible on screen");
+        assertTrue(loginPage.headerText().contains("Swag Labs"));
     }
 
-
 }
+
