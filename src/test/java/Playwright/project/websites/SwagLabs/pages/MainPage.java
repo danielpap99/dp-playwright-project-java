@@ -10,6 +10,8 @@ public class MainPage {
     // Locators
     private final Locator shoppingCartIcon;
     private final Locator header;
+    private final Locator productItems;
+    private final Locator sortControl;
 
     // Constructor
     public MainPage(Page page) {
@@ -17,21 +19,23 @@ public class MainPage {
 
         shoppingCartIcon = page.locator("[data-test='shopping-cart-link']");
         header = page.locator("[data-test='primary-header']");
+        productItems = page.locator("[data-test='inventory-item']");
+        sortControl = page.locator("[data-test='product-sort-container']");
     }
 
     // Actions
 
 
     // Assertions
-    public boolean shoppingCartIconIsVisible() {
-        return shoppingCartIcon.isVisible();
+    public int productCount() {
+        return productItems.count();
     }
 
-    public boolean headerIsVisible() {
-        return header.isVisible();
+    public boolean isOnInventoryPage() {
+        return page.url().equals("https://www.saucedemo.com/inventory.html")
+                && header.isVisible()
+                && shoppingCartIcon.isVisible()
+                && sortControl.isVisible();
     }
 
-    public String headerText() {
-        return header.innerText();
-    }
 }

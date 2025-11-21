@@ -1,53 +1,12 @@
 package Playwright.project.websites.SwagLabs.tests;
 
+import Playwright.project.websites.SwagLabs.utilities.Base;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
-import Playwright.project.websites.SwagLabs.pages.LoginPage;
-import Playwright.project.websites.SwagLabs.pages.MainPage;
-
-import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class LoginTests {
-
-    private static Playwright playwright;
-    private static Browser browser;
-    private static BrowserContext browserContext;
-    Page page;
-    LoginPage loginPage;
-    MainPage mainPage;
-
-    @BeforeAll
-    public static void SetUpBrowser() {
-        playwright = Playwright.create();
-        playwright.selectors().setTestIdAttribute("data-test"); //configure getByTestId to use "data-test"
-
-        browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions()
-                        .setHeadless(false)
-                        .setSlowMo(1000)
-        );
-
-        browserContext = browser.newContext(
-                new Browser.NewContextOptions()
-                        .setViewportSize(1500, 955) // set as large as your screen
-        );
-    }
-
-    @BeforeEach
-    public void setUp() {
-        page = browserContext.newPage();
-        page.navigate("https://www.saucedemo.com/");
-        loginPage = new LoginPage(page);
-        mainPage = new MainPage(page);
-    }
-
-    @AfterAll
-    public static void TearDown() {
-        browser.close(); // shut down browser
-        playwright.close(); //shut down playwright instance
-    }
+public class LoginTests extends Base {
 
     @Test
     @Tag("Smoke")
@@ -64,9 +23,7 @@ public class LoginTests {
 
         loginPage.successfullyLogin();
 
-        assertTrue(mainPage.shoppingCartIconIsVisible(), "shopping cart is visible on screen");
-        assertTrue(mainPage.headerIsVisible(),  "the header Swag Labs is visible on screen");
-        assertTrue(mainPage.headerText().contains("Swag Labs"));
+        assertTrue(mainPage.isOnInventoryPage(), "inventory page loads correctly");
     }
 
     @Test
@@ -94,6 +51,30 @@ public class LoginTests {
         assertAll(
                 () -> assertTrue(loginPage.errorMessageIsVisible(), "error message should be visible"),
                 () -> assertEquals("Epic sadface: Sorry, this user has been locked out.", loginPage.errorMessageText())
+        );
+    }
+
+    @Test
+    @Tag("Stage1")
+    void userNameAndPasswordRequired() {
+
+        loginPage.enterUsername("standard_user");
+        loginPage.clickLoginButton();
+
+        assertAll(
+                () -> assertTrue(loginPage.errorMessageIsVisible(), "error message should be visible"),
+                () -> assertEquals("Epic sadface: Password is required", loginPage.errorMessageText()),
+                () -> assertFalse(mainPage.isOnInventoryPage())
+        );
+
+        loginPage.closeErrorMessage();
+        loginPage.enterUsername("");
+        loginPage.enterPassword("secret_sauce");
+        loginPage.clickLoginButton();
+
+        assertAll(
+                () -> assertTrue(loginPage.errorMessageIsVisible(), "error message should be visible"),
+                () -> assertEquals("Epic sadface: Username is required", loginPage.errorMessageText())
         );
     }
 

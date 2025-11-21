@@ -12,6 +12,7 @@ public class LoginPage {
     private final Locator passwordField;
     private final Locator loginButton;
     private final Locator errorMessage;
+    private final Locator errorMessageCrossButton;
 
     // Constructor
     public LoginPage(Page page) {
@@ -22,6 +23,7 @@ public class LoginPage {
         passwordField = page.locator("#password");
         loginButton = page.locator("#login-button");
         errorMessage = page.locator("[data-test='error']");
+        errorMessageCrossButton = page.locator("[data-test='error-button']");
     }
 
     // Actions
@@ -30,6 +32,7 @@ public class LoginPage {
     }
 
     public void enterUsername(String username) {
+        usernameField.clear();
         usernameField.fill(username);
     }
 
@@ -38,6 +41,7 @@ public class LoginPage {
     }
 
     public void enterPassword(String password) {
+        passwordField.clear();
         passwordField.fill(password);
     }
 
@@ -49,6 +53,10 @@ public class LoginPage {
         enterValidUsername();
         enterValidPassword();
         clickLoginButton();
+    }
+
+    public void closeErrorMessage() {
+        errorMessageCrossButton.click();
     }
 
 

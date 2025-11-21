@@ -15,6 +15,7 @@ application behavior.
 before adding new ones.
 - When you create a new page class, make it exactly the same format as the other page classes
 - When you need to import a new page class to a test class, instantiate it within @BeforeEach rather than inside the test itself
+- When creating new test class files, set them up in exactly the same style and format as the other test class files
 
 # For each test you generate
 - Use Playwright tool to manually execute it in real-time.
