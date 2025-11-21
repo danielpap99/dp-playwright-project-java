@@ -12,6 +12,7 @@ public class MainPage {
     private final Locator header;
     private final Locator productItems;
     private final Locator sortControl;
+    private final Locator activeSortControl;
 
     // Constructor
     public MainPage(Page page) {
@@ -21,10 +22,14 @@ public class MainPage {
         header = page.locator("[data-test='primary-header']");
         productItems = page.locator("[data-test='inventory-item']");
         sortControl = page.locator("[data-test='product-sort-container']");
+        activeSortControl = page.locator("[data-test='active-option']");
     }
 
     // Actions
-
+    public void selectSortOption(String sort) {
+        sortControl.click();
+        page.locator("select[data-test='product-sort-container']").selectOption(sort);
+    }
 
     // Assertions
     public int productCount() {
@@ -36,6 +41,10 @@ public class MainPage {
                 && header.isVisible()
                 && shoppingCartIcon.isVisible()
                 && sortControl.isVisible();
+    }
+
+    public String activeSortOptionText() {
+        return activeSortControl.textContent();
     }
 
 }

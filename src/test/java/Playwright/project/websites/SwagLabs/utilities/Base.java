@@ -43,6 +43,10 @@ public class Base {
         mainPage = new MainPage(page);
     }
 
+    public void goToMainPage() {
+        loginPage.successfullyLogin();
+    }
+
     @AfterAll
     public static void TearDown() {
         browser.close();
