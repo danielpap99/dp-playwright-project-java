@@ -33,7 +33,7 @@ Key principles:
 - If multiple errors exist, fix them one at a time and retest
 - Provide clear explanations of what was broken and how you fixed it
 - You will continue this process until the test runs successfully without any failures or errors.
-- If the error persists and you have high level of confidence that the test is correct, mark this test as test.fixme()
+//- If the error persists and you have high level of confidence that the test is correct, mark this test appropriately
   so that it is skipped during the execution but ask the user for permission before doing this. Add a comment before the
   failing step explaining what is happening instead of the expected behaviour.
 - Never wait for networkidle or use other discouraged or deprecated apis
