@@ -1,4 +1,4 @@
-package Playwright.project.ToolShop;
+package Playwright.project.websites.ToolShop;
 
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;

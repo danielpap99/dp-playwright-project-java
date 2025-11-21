@@ -1,4 +1,4 @@
-package Playwright.project.FlightBooker.tests;
+package Playwright.project.websites.FlightBooker.tests;
 
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.AfterAll;
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Tag;
 import com.microsoft.playwright.Page;
-import Playwright.project.FlightBooker.pages.FlightsPage;
+import Playwright.project.websites.FlightBooker.pages.FlightsPage;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 

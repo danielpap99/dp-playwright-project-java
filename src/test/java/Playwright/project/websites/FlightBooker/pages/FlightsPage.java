@@ -1,4 +1,4 @@
-package Playwright.project.FlightBooker.pages;
+package Playwright.project.websites.FlightBooker.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
