@@ -1,6 +1,7 @@
 package Playwright.project.websites.SwagLabs.utilities;
 
 import com.microsoft.playwright.*;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import Playwright.project.websites.SwagLabs.pages.LoginPage;
 import Playwright.project.websites.SwagLabs.pages.MainPage;
@@ -12,6 +13,7 @@ public class Base {
     protected static Browser browser;
     protected static BrowserContext browserContext;
     protected Page page;
+    protected SoftAssertions softly;
 
     // Pages that should be available in all tests
     protected LoginPage loginPage;
@@ -38,6 +40,7 @@ public class Base {
     public void setUp() {
         page = browserContext.newPage();
         page.navigate("https://www.saucedemo.com/");
+        softly = new SoftAssertions();
         loginPage = new LoginPage(page);
         mainPage = new MainPage(page);
     }
@@ -46,8 +49,13 @@ public class Base {
         loginPage.successfullyLogin();
     }
 
+    @AfterEach
+    public void tearDownTest() {
+        softly.assertAll();
+    }
+
     @AfterAll
-    public static void TearDown() {
+    public static void tearDownClass() {
         browser.close();
         playwright.close();
     }

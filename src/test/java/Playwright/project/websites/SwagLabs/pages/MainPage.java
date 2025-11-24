@@ -16,6 +16,7 @@ public class MainPage {
     private final Locator productName;
     private final Locator productPrice;
 
+
     // Constructor
     public MainPage(Page page) {
         this.page = page;
@@ -29,10 +30,29 @@ public class MainPage {
         productPrice = page.locator("[data-test='inventory-item-price']");
     }
 
+    // Dynamic locators
+    public Locator addToCartButton(String productName) {
+        String product = productName.toLowerCase().replace(" ", "-");
+        return page.locator("[data-test='add-to-cart-" + product + "']");
+    }
+
+    public Locator removeButton(String productName) {
+        String product = productName.toLowerCase().replace(" ", "-");
+        return page.locator("[data-test='remove-" + product + "']");
+    }
+
     // Actions
     public void selectSortOption(String sort) {
         sortControl.click();
         page.locator("select[data-test='product-sort-container']").selectOption(sort);
+    }
+
+    public void addProductToCart(String productName) {
+        addToCartButton(productName).click();
+    }
+
+    public void removeProductFromCart(String productName) {
+        removeButton(productName).click();
     }
 
     // Assertions
@@ -57,6 +77,15 @@ public class MainPage {
 
     public String firstProductPrice() {
         return productPrice.first().textContent();
+    }
+
+    public String shoppingCartQuantityText() {
+        return shoppingCartIcon.textContent();
+    }
+
+    public boolean addToCartButtonVisible(String productName) {
+        String product = productName.toLowerCase().replace(" ", "-");
+        return addToCartButton(product).isVisible();
     }
 
 }
