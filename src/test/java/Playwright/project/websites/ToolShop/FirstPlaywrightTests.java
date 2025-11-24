@@ -17,7 +17,7 @@ public class FirstPlaywrightTests {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setSlowMo(500)
+                        .setSlowMo(100)
         );
 
         browserContext = browser.newContext(

@@ -13,6 +13,8 @@ public class MainPage {
     private final Locator productItems;
     private final Locator sortControl;
     private final Locator activeSortControl;
+    private final Locator productName;
+    private final Locator productPrice;
 
     // Constructor
     public MainPage(Page page) {
@@ -23,6 +25,8 @@ public class MainPage {
         productItems = page.locator("[data-test='inventory-item']");
         sortControl = page.locator("[data-test='product-sort-container']");
         activeSortControl = page.locator("[data-test='active-option']");
+        productName = page.locator("[data-test='inventory-item-name']");
+        productPrice = page.locator("[data-test='inventory-item-price']");
     }
 
     // Actions
@@ -45,6 +49,14 @@ public class MainPage {
 
     public String activeSortOptionText() {
         return activeSortControl.textContent();
+    }
+
+    public String firstProductName() {
+        return productName.first().textContent();
+    }
+
+    public String firstProductPrice() {
+        return productPrice.first().textContent();
     }
 
 }

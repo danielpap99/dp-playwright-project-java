@@ -22,10 +22,27 @@ public class InventoryTests extends Base {
     void alphabeticalSortWorksCorrectly() {
 
         goToMainPage();
-
         assertEquals("Name (A to Z)", mainPage.activeSortOptionText());
 
         mainPage.selectSortOption("za");
+        assertEquals("Test.allTheThings() T-Shirt (Red)", mainPage.firstProductName());
 
+        mainPage.selectSortOption("az");
+        assertEquals("Sauce Labs Backpack", mainPage.firstProductName());
+    }
+
+    @Test
+    @Tag("Stage2")
+    void pricingSortWorksCorrectly() {
+
+        goToMainPage();
+
+        mainPage.selectSortOption("lohi");
+        assertEquals("Sauce Labs Onesie", mainPage.firstProductName());
+        assertEquals("$7.99", mainPage.firstProductPrice());
+
+        mainPage.selectSortOption("hilo");
+        assertEquals("Sauce Labs Fleece Jacket", mainPage.firstProductName());
+        assertEquals("$49.99", mainPage.firstProductPrice());
     }
 }
