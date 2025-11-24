@@ -23,7 +23,7 @@ public class DifferentLocatorsTests {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setSlowMo(1000)
+                        .setSlowMo(100)
         );
 
         browserContext = browser.newContext(

@@ -4,6 +4,7 @@ import Playwright.project.websites.SwagLabs.utilities.Base;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 public class LoginTests extends Base {
@@ -12,9 +13,11 @@ public class LoginTests extends Base {
     @Tag("Smoke")
     void loginPageLoadsCorrectly() {
 
-        assertTrue(loginPage.usernameFieldIsVisible(), "username field should be visible on login page");
-        assertTrue(loginPage.passwordFieldIsVisible(), "password field should be visible on login page");
-        assertTrue(loginPage.loginButtonIsVisible(), "login button should be visible on login page");
+        assertAll(
+                () -> assertThat(loginPage.usernameFieldIsVisible()).isTrue(),
+                () -> assertThat(loginPage.passwordFieldIsVisible()).isTrue(),
+                () -> assertThat(loginPage.loginButtonIsVisible()).isTrue()
+        );
     }
 
     @Test
@@ -23,7 +26,7 @@ public class LoginTests extends Base {
 
         loginPage.successfullyLogin();
 
-        assertTrue(mainPage.isOnInventoryPage(), "inventory page loads correctly");
+        assertThat(mainPage.isOnInventoryPage()).isTrue();
     }
 
     @Test
@@ -35,8 +38,9 @@ public class LoginTests extends Base {
         loginPage.clickLoginButton();
 
         assertAll(
-                () -> assertTrue(loginPage.errorMessageIsVisible(), "error message should be visible"),
-                () -> assertEquals("Epic sadface: Username and password do not match any user in this service", loginPage.errorMessageText())
+                () -> assertThat(loginPage.errorMessageIsVisible()).isTrue(),
+                () -> assertThat(loginPage.errorMessageText()).isEqualTo("Epic sadface: Username and password do not match any user in this service"),
+                () -> assertThat(mainPage.isOnInventoryPage()).isFalse()
         );
     }
 
@@ -49,8 +53,9 @@ public class LoginTests extends Base {
         loginPage.clickLoginButton();
         
         assertAll(
-                () -> assertTrue(loginPage.errorMessageIsVisible(), "error message should be visible"),
-                () -> assertEquals("Epic sadface: Sorry, this user has been locked out.", loginPage.errorMessageText())
+                () -> assertThat(loginPage.errorMessageIsVisible()).isTrue(),
+                () -> assertThat(loginPage.errorMessageText()).isEqualTo("Epic sadface: Sorry, this user has been locked out."),
+                () -> assertThat(mainPage.isOnInventoryPage()).isFalse()
         );
     }
 
@@ -62,9 +67,9 @@ public class LoginTests extends Base {
         loginPage.clickLoginButton();
 
         assertAll(
-                () -> assertTrue(loginPage.errorMessageIsVisible(), "error message should be visible"),
-                () -> assertEquals("Epic sadface: Password is required", loginPage.errorMessageText()),
-                () -> assertFalse(mainPage.isOnInventoryPage())
+                () -> assertThat(loginPage.errorMessageIsVisible()).isTrue(),
+                () -> assertThat(loginPage.errorMessageText()).isEqualTo("Epic sadface: Password is required"),
+                () -> assertThat(mainPage.isOnInventoryPage()).isFalse()
         );
 
         loginPage.closeErrorMessage();
@@ -73,10 +78,10 @@ public class LoginTests extends Base {
         loginPage.clickLoginButton();
 
         assertAll(
-                () -> assertTrue(loginPage.errorMessageIsVisible(), "error message should be visible"),
-                () -> assertEquals("Epic sadface: Username is required", loginPage.errorMessageText())
+                () -> assertThat(loginPage.errorMessageIsVisible()).isTrue(),
+                () -> assertThat(loginPage.errorMessageText()).isEqualTo("Epic sadface: Username is required"),
+                () -> assertThat(mainPage.isOnInventoryPage()).isFalse()
         );
     }
-
 }
 

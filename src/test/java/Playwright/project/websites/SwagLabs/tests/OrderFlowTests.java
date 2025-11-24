@@ -3,7 +3,6 @@ package Playwright.project.websites.SwagLabs.tests;
 import Playwright.project.websites.SwagLabs.utilities.Base;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
