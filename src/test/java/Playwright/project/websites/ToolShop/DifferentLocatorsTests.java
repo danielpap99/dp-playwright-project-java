@@ -3,6 +3,8 @@ package Playwright.project.websites.ToolShop;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
+import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 
@@ -21,7 +23,7 @@ public class DifferentLocatorsTests {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setSlowMo(100)
+                        .setSlowMo(1000)
         );
 
         browserContext = browser.newContext(
@@ -169,6 +171,24 @@ public class DifferentLocatorsTests {
         contactMenuOption.click();
 
         assertThat(sendButton).isVisible();
+    }
+
+    @DisplayName("Filtering")
+    @Test
+    void findElementsUsingFilteringMethod() {
+
+        Locator searchField = page.getByTestId("search-query");
+        Locator searchButton = page.getByTestId("search-submit");
+
+        List<String> allProducts = page.locator(".card")
+                        .filter(new Locator.FilterOptions().setHas(page.getByText("Out of stock")))
+                        .getByTestId("product-name")
+                        .allTextContents();
+
+        searchField.fill("Pliers");
+        searchButton.click();
+
+        assertThat(allProducts).contains(" Long Nose Pliers ");
     }
 
 }
