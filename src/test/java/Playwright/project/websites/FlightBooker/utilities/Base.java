@@ -1,9 +1,8 @@
-package Playwright.project.websites.SwagLabs.utilities;
+package Playwright.project.websites.FlightBooker.utilities;
 
+import Playwright.project.websites.FlightBooker.pages.FlightsPage;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
-import Playwright.project.websites.SwagLabs.pages.LoginPage;
-import Playwright.project.websites.SwagLabs.pages.MainPage;
 
 
 public class Base {
@@ -14,8 +13,7 @@ public class Base {
     protected Page page;
 
     // Pages that should be available in all tests
-    protected LoginPage loginPage;
-    protected MainPage mainPage;
+    protected FlightsPage flightsPage;
 
     @BeforeAll
     public static void SetUpBrowser() {
@@ -37,13 +35,8 @@ public class Base {
     @BeforeEach
     public void setUp() {
         page = browserContext.newPage();
-        page.navigate("https://www.saucedemo.com/");
-        loginPage = new LoginPage(page);
-        mainPage = new MainPage(page);
-    }
-
-    public void goToMainPage() {
-        loginPage.successfullyLogin();
+        page.navigate("https://rahulshettyacademy.com/dropdownsPractise/");
+        flightsPage = new FlightsPage(page);
     }
 
     @AfterAll
