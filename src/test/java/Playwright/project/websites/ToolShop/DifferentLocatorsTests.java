@@ -54,6 +54,23 @@ public class DifferentLocatorsTests {
     }
 
     @Test
+    void findElementUsingCSSSelector() {
+
+        Locator contactButton = page.locator("[data-test='nav-contact']");
+        Locator firstName = page.locator("#first_name"); //using id to locate input fields
+        Locator lastName = page.locator("#last_name");
+        Locator emailAlert = page.locator("#email_alert");
+        Locator sendButton = page.locator(".btnSubmit"); // using class to locate button
+
+        contactButton.click();
+        firstName.fill("Example");
+        lastName.fill("Example");
+        sendButton.click();
+
+        assertThat(emailAlert).isVisible();
+    }
+
+    @Test
     void findElementUsingTextValue() {
 
         Locator boltCutters = page.getByText("Bolt Cutters"); //use text to select an element
