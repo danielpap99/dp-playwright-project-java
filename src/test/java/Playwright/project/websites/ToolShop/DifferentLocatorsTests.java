@@ -42,6 +42,7 @@ public class DifferentLocatorsTests {
         playwright.close(); //shut down playwright instance
     }
 
+    @DisplayName("By data-test id")
     @Test
     void findElementUsingDataTestId() {
 
@@ -53,6 +54,7 @@ public class DifferentLocatorsTests {
         assertThat(loginButton).isVisible();
     }
 
+    @DisplayName("By CSS Selector")
     @Test
     void findElementUsingCSSSelector() {
 
@@ -70,6 +72,25 @@ public class DifferentLocatorsTests {
         assertThat(emailAlert).isVisible();
     }
 
+    @DisplayName("By attribute")
+    @Test
+    void findElementUsingAttribute() {
+
+        Locator contactButton = page.locator("[data-test='nav-contact']");
+        Locator firstName = page.locator("[placeholder='Your first name *']"); // using placeholder attribute
+        Locator lastName = page.locator("[placeholder='Your last name *']"); // using placeholder attribute
+        Locator emailAlert = page.locator("#email_alert");
+        Locator sendButton = page.locator(".btnSubmit");
+
+        contactButton.click();
+        firstName.fill("Example");
+        lastName.fill("Example");
+        sendButton.click();
+
+        assertThat(emailAlert).isVisible();
+    }
+
+    @DisplayName("By text value")
     @Test
     void findElementUsingTextValue() {
 
@@ -84,6 +105,7 @@ public class DifferentLocatorsTests {
         assertThat(hardwareTag).isVisible(); // different approach, check if visible via text
     }
 
+    @DisplayName("By alt text")
     @Test
     void findElementUsingAltText() {
 
@@ -96,6 +118,7 @@ public class DifferentLocatorsTests {
         assertThat(productTitle).hasText("Combination Pliers");
     }
 
+    @DisplayName("By title")
     @Test
     void findElementUsingTitle() {
 
@@ -109,6 +132,7 @@ public class DifferentLocatorsTests {
         assertThat(searchButton).isVisible();
     }
 
+    @DisplayName("By placeholder")
     @Test
     void findElementUsingPlaceHolder() {
 
@@ -121,6 +145,7 @@ public class DifferentLocatorsTests {
         lastName.fill("Johns");
     }
 
+    @DisplayName("By role")
     @Test
     void findElementUsingRole() {
 
@@ -132,7 +157,18 @@ public class DifferentLocatorsTests {
         assertThat(loginButton).isVisible();
     }
 
+    @DisplayName("Nested")
+    @Test
+    void findElementsUsingNestedMethod() {
 
+        Locator contactMenuOption = page.getByRole(AriaRole.MENUBAR, new Page.GetByRoleOptions()
+                .setName("Main Menu"))
+                .getByText("Contact"); //using the menubar to locate elements within
+        Locator sendButton = page.locator(".btnSubmit");
 
+        contactMenuOption.click();
+
+        assertThat(sendButton).isVisible();
+    }
 
 }
