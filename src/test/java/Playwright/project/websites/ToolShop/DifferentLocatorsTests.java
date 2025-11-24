@@ -180,7 +180,7 @@ public class DifferentLocatorsTests {
         Locator searchField = page.getByTestId("search-query");
         Locator searchButton = page.getByTestId("search-submit");
 
-        List<String> allProducts = page.locator(".card")
+        List<String> outOfStockProducts = page.locator(".card")
                         .filter(new Locator.FilterOptions().setHas(page.getByText("Out of stock")))
                         .getByTestId("product-name")
                         .allTextContents();
@@ -188,7 +188,24 @@ public class DifferentLocatorsTests {
         searchField.fill("Pliers");
         searchButton.click();
 
-        assertThat(allProducts).contains(" Long Nose Pliers ");
+        assertThat(outOfStockProducts).contains(" Long Nose Pliers ");
     }
 
+    @Test
+    void searchReturnsRelevantProducts() {
+
+        Locator searchField = page.getByTestId("search-query");
+        Locator searchButton = page.getByTestId("search-submit");
+        Locator cards = page.locator(".card");
+
+        searchField.fill("Pliers");
+        searchButton.click();
+
+        int count = cards.count();
+
+        for (int i = 0; i < count; i++) {
+            String text = cards.nth(i).innerText().toLowerCase();
+            assertThat(text).as("Card " + (i + 1)).contains("pliersss");
+        }
+    }
 }
