@@ -55,7 +55,6 @@ public class ContactFormTests {
     @DisplayName("Dropdown menu")
     @Test
     void subjectCanBeSelected() {
-
         Locator contactButton = page.getByTestId("nav-contact");
         Locator subjectDropdown = page.getByTestId("subject");
 
@@ -68,7 +67,6 @@ public class ContactFormTests {
     @DisplayName("Dropdown menu")
     @Test
     void txtFileCanBeAttached() {
-
         Locator contactButton = page.getByTestId("nav-contact");
         Locator attachment = page.getByTestId("attachment");
 
@@ -82,7 +80,6 @@ public class ContactFormTests {
     @DisplayName("Dropdown menu")
     @Test
     void txtFileSizeIsTooLarge() {
-
         Locator contactButton = page.getByTestId("nav-contact");
         Locator sendButton = page.getByTestId("contact-submit");
         Locator attachment = page.getByTestId("attachment");

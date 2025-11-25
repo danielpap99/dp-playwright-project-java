@@ -13,13 +13,10 @@ public class OneWayTrips extends Base {
     @Test
     @Tag("Smoke")
     void mainPageLoadsCorrectly() {
-
         assertAll(
                 () -> assertThat(flightsPage.departureCityIsVisible()).isTrue(),
                 () -> assertThat(flightsPage.arrivalCityIsVisible()).isTrue(),
                 () -> assertThat(flightsPage.submitButtonIsVisible()).isTrue()
         );
     }
-
-
 }

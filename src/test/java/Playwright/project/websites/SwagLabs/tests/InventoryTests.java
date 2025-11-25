@@ -11,7 +11,6 @@ public class InventoryTests extends Base {
     @Test
     @Tag("Smoke")
     void inventoryPageLoadsCorrectly() {
-
         goToMainPage();
 
         assertTrue(mainPage.isOnInventoryPage(), "Inventory page loads correctly");
@@ -21,7 +20,6 @@ public class InventoryTests extends Base {
     @Test
     @Tag("Stage2")
     void alphabeticalSortWorksCorrectly() {
-
         goToMainPage();
         assertEquals("Name (A to Z)", mainPage.activeSortOptionText());
 
@@ -35,7 +33,6 @@ public class InventoryTests extends Base {
     @Test
     @Tag("Stage2")
     void pricingSortWorksCorrectly() {
-
         goToMainPage();
 
         mainPage.selectSortOption("lohi");

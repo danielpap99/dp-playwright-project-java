@@ -40,7 +40,6 @@ public class FirstPlaywrightTests {
 
     @Test
     void pageTitleIsShown() {
-
         String title = page.title();
 
         Assertions.assertTrue(title.contains("Practice Software Testing"));

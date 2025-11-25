@@ -12,7 +12,6 @@ public class OrderFlowTests extends Base {
     @Test
     @Tag("Stage2")
     void shoppingCartQuantityUpdatesCorrectly() {
-
         goToMainPage();
 
         mainPage.addProductToCart("Sauce Labs Backpack");

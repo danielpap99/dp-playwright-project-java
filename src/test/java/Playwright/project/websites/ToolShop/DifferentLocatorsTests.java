@@ -55,7 +55,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By data-test id")
     @Test
     void findElementUsingDataTestId() {
-
         Locator signInButton = page.getByTestId("nav-sign-in"); //using data-test id to locate element
         Locator loginButton = page.locator("[data-test='login-submit']"); //behind the scenes of getByTestId
 
@@ -67,7 +66,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By CSS Selector")
     @Test
     void findElementUsingCSSSelector() {
-
         Locator contactButton = page.locator("[data-test='nav-contact']");
         Locator firstName = page.locator("#first_name"); //using id to locate input fields
         Locator lastName = page.locator("#last_name");
@@ -85,7 +83,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By attribute")
     @Test
     void findElementUsingAttribute() {
-
         Locator contactButton = page.locator("[data-test='nav-contact']");
         Locator firstName = page.locator("[placeholder='Your first name *']"); // using placeholder attribute
         Locator lastName = page.locator("[placeholder='Your last name *']"); // using placeholder attribute
@@ -103,7 +100,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By text value")
     @Test
     void findElementUsingTextValue() {
-
         Locator boltCutters = page.getByText("Bolt Cutters"); //use text to select an element
         Locator hardwareTag = page.getByText("MightyCraft Hardware");
         Locator productTitle = page.locator("[data-test='product-name']");
@@ -118,7 +114,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By alt text")
     @Test
     void findElementUsingAltText() {
-
         Locator boltCutters = page.getByAltText("Combination Pliers"); //use alt text to select an element
         Locator productTitle = page.locator("[data-test='product-name']");
 
@@ -131,7 +126,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By title")
     @Test
     void findElementUsingTitle() {
-
         Locator boltCutters = page.getByText("Bolt Cutters");
         Locator logoHoverMessage = page.getByTitle("Practice Software Testing - Toolshop"); //use title to select an element
         Locator searchButton = page.locator("[data-test='search-submit']");
@@ -145,7 +139,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By placeholder")
     @Test
     void findElementUsingPlaceHolder() {
-
         Locator contactButton = page.locator("[data-test='nav-contact']");
         Locator firstName = page.getByPlaceholder("Your first name"); //using placeholder to locate input field
         Locator lastName = page.getByPlaceholder("Your last name");
@@ -158,7 +151,6 @@ public class DifferentLocatorsTests {
     @DisplayName("By role")
     @Test
     void findElementUsingRole() {
-
         Locator signInButton = page.getByRole(AriaRole.MENUITEM, new Page.GetByRoleOptions().setName("Sign in")); //using role to locate element
         Locator loginButton = page.locator("[data-test='login-submit']");
 
@@ -170,7 +162,6 @@ public class DifferentLocatorsTests {
     @DisplayName("Nested")
     @Test
     void findElementsUsingNestedMethod() {
-
         Locator contactMenuOption = page.getByRole(AriaRole.MENUBAR, new Page.GetByRoleOptions()
                 .setName("Main Menu"))
                 .getByText("Contact"); //using the menubar to locate elements within
@@ -184,7 +175,6 @@ public class DifferentLocatorsTests {
     @DisplayName("Filtering")
     @Test
     void findElementsUsingFilteringMethod() {
-
         Locator searchField = page.getByTestId("search-query");
         Locator searchButton = page.getByTestId("search-submit");
 
@@ -201,7 +191,6 @@ public class DifferentLocatorsTests {
 
     @Test
     void searchReturnsRelevantProducts() {
-
         Locator searchField = page.getByTestId("search-query");
         Locator searchButton = page.getByTestId("search-submit");
         Locator cards = page.locator(".card-title");

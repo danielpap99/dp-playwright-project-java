@@ -12,7 +12,6 @@ public class LoginTests extends Base {
     @Test
     @Tag("Smoke")
     void loginPageLoadsCorrectly() {
-
         assertAll(
                 () -> assertThat(loginPage.usernameFieldIsVisible()).isTrue(),
                 () -> assertThat(loginPage.passwordFieldIsVisible()).isTrue(),
@@ -23,7 +22,6 @@ public class LoginTests extends Base {
     @Test
     @Tag("Smoke")
     void successfulLogin() {
-
         loginPage.successfullyLogin();
 
         assertThat(mainPage.isOnInventoryPage()).isTrue();
@@ -32,7 +30,6 @@ public class LoginTests extends Base {
     @Test
     @Tag("Stage1")
     void loginFailsWithValidUsernameAndInvalidPassword() {
-
         loginPage.enterValidUsername();
         loginPage.enterPassword("definitely_wrong_password");
         loginPage.clickLoginButton();
@@ -47,7 +44,6 @@ public class LoginTests extends Base {
     @Test
     @Tag("Stage1")
     void loginFailsForLockedOutUserWithValidPassword() {
-
         loginPage.enterUsername("locked_out_user");
         loginPage.enterValidPassword();
         loginPage.clickLoginButton();
@@ -62,7 +58,6 @@ public class LoginTests extends Base {
     @Test
     @Tag("Stage1")
     void userNameAndPasswordRequired() {
-
         loginPage.enterUsername("standard_user");
         loginPage.clickLoginButton();
 
