@@ -1,26 +1,30 @@
 package Playwright.project.websites.ToolShop.tests;
 
-import Playwright.project.websites.ToolShop.pages.ContactPage;
 import Playwright.project.websites.ToolShop.utilities.Base;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 
 public class MainPageProductsTests extends Base {
 
-    private ContactPage contactPage;
 
     @Test
     @Tag("Smoke")
-    void productNamesAreDisplayed() {
+    void productNamesAndPricesAreDisplayed() {
         List<String> productNames = mainPage.productNameText();
+        List<String> productPrices = mainPage.productPrices();
 
-        softly.assertThat(productNames).isNotEmpty();
+        assertAll(
+                () -> softly.assertThat(productNames).isNotEmpty(),
+                () -> softly.assertThat(productPrices).isNotEmpty()
+        );
     }
 
     @Test
-    @Tag("Stage1")
+    @Tag("Stage2")
     void productImagesAreDisplayed() {
         List<String> productImageTitles = mainPage.productImageTitles();
 
@@ -28,6 +32,7 @@ public class MainPageProductsTests extends Base {
     }
 
     @Test
+    @Tag("Stage2")
     void searchReturnsRelevantProducts() {
         mainPage.searchForProduct("Pliers");
 

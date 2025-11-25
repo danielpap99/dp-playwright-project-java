@@ -13,11 +13,11 @@ public class MainPage {
 
     // Locators
     private final Locator contactMenuOption;
-    private final Locator products;
     private final Locator searchField;
     private final Locator searchButton;
     private final Locator productName;
     private final Locator productImage;
+    private final Locator productPrice;
 
 
     // Constructor
@@ -26,11 +26,11 @@ public class MainPage {
         this.page = page;
 
         contactMenuOption = page.getByTestId("nav-contact");
-        products = page.locator("#card");
         searchField = page.getByTestId("search-query");
         searchButton = page.getByTestId("search-submit");
-        productName = page.locator(".card-title");
+        productName = page.getByTestId("product-name");
         productImage = page.locator(".card-img-top");
+        productPrice = page.getByTestId("product-price");
     }
 
     // Actions
@@ -58,8 +58,12 @@ public class MainPage {
         return names;
     }
 
+    public List<String> productPrices() {
+        return productPrice.allTextContents();
+    }
+
     public List<String> productImageTitles() {
-        page.waitForSelector(".card-img-top"); //wait until images load
+        page.waitForSelector(".card-img-top"); //example of a wait method until images appear
 
         return productImage.all()
                 .stream()
