@@ -2,6 +2,10 @@ package Playwright.project.websites.SwagLabs.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainPage {
 
@@ -44,6 +48,7 @@ public class MainPage {
     // Actions
     public void selectSortOption(String sort) {
         sortControl.selectOption(sort);
+        page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
     public void addProductToCart(String productName) {
@@ -69,6 +74,23 @@ public class MainPage {
     public String activeSortOptionText() {
         return activeSortControl.textContent();
     }
+
+    public List<String> productNames() {
+        return productName.allTextContents();
+    }
+
+    public List<Double> productPrices() {
+        List<String> priceStrings = productPrice.allTextContents();
+        List<Double> prices = new ArrayList<>();
+
+        for (String price : priceStrings) {
+            double value = Double.parseDouble(price.replace("$", ""));
+            prices.add(value);
+        }
+
+        return prices;
+    }
+
 
     public String firstProductName() {
         return productName.first().textContent();

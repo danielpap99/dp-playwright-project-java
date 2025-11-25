@@ -25,7 +25,7 @@ public class ContactFormTests {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setSlowMo(1000)
+                        .setSlowMo(100)
         );
 
         browserContext = browser.newContext(
@@ -73,8 +73,8 @@ public class ContactFormTests {
         contactButton.click();
         attachment.setInputFiles(Paths.get("src/test/resources/data/testdata.txt"));
 
-        String uploadedFileName = attachment.evaluate("el => el.files[0].name").toString();
-        assertThat(uploadedFileName).isEqualTo("testdata.txt");
+        String uploadedFileName = attachment.inputValue();
+        assertThat(uploadedFileName).endsWith("testdata.txt");
     }
 
     @DisplayName("Dropdown menu")
@@ -88,8 +88,8 @@ public class ContactFormTests {
         contactButton.click();
         attachment.setInputFiles(Paths.get("src/test/resources/data/testdata.txt"));
 
-        String uploadedFileName = attachment.evaluate("el => el.files[0].name").toString();
-        assertThat(uploadedFileName).isEqualTo("testdata.txt");
+        String uploadedFileName = attachment.inputValue();
+        assertThat(uploadedFileName).endsWith("testdata.txt");
 
         sendButton.click();
         assertThat(attachmentError).isVisible();
