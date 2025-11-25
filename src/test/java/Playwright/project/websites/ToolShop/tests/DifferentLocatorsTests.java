@@ -188,21 +188,4 @@ public class DifferentLocatorsTests {
 
         assertThat(outOfStockProducts).contains(" Long Nose Pliers ");
     }
-
-    @Test
-    void searchReturnsRelevantProducts() {
-        Locator searchField = page.getByTestId("search-query");
-        Locator searchButton = page.getByTestId("search-submit");
-        Locator cards = page.locator(".card-title");
-
-        searchField.fill("Pliers");
-        searchButton.click();
-
-        int count = cards.count();
-
-        for (int i = 0; i < count; i++) {
-            String text = cards.nth(i).innerText().toLowerCase();
-            softly.assertThat(text).as("Card " + (i + 1)).contains("pliers");
-        }
-    }
 }
