@@ -43,8 +43,7 @@ public class MainPage {
 
     // Actions
     public void selectSortOption(String sort) {
-        sortControl.click();
-        page.locator("select[data-test='product-sort-container']").selectOption(sort);
+        sortControl.selectOption(sort);
     }
 
     public void addProductToCart(String productName) {
