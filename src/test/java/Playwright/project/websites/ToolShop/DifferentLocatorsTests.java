@@ -2,6 +2,7 @@ package Playwright.project.websites.ToolShop;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -13,6 +14,7 @@ public class DifferentLocatorsTests {
     private static Playwright playwright;
     private static Browser browser;
     private static BrowserContext browserContext;
+    protected SoftAssertions softly;
     Page page;
 
     @BeforeAll
@@ -36,6 +38,12 @@ public class DifferentLocatorsTests {
     public void setUp() {
         page = browserContext.newPage();
         page.navigate("https://practicesoftwaretesting.com/");
+        softly = new SoftAssertions();
+    }
+
+    @AfterEach
+    public void tearDownTest() {
+        softly.assertAll();
     }
 
     @AfterAll
@@ -196,7 +204,7 @@ public class DifferentLocatorsTests {
 
         Locator searchField = page.getByTestId("search-query");
         Locator searchButton = page.getByTestId("search-submit");
-        Locator cards = page.locator(".card");
+        Locator cards = page.locator(".card-title");
 
         searchField.fill("Pliers");
         searchButton.click();
@@ -205,7 +213,7 @@ public class DifferentLocatorsTests {
 
         for (int i = 0; i < count; i++) {
             String text = cards.nth(i).innerText().toLowerCase();
-            assertThat(text).as("Card " + (i + 1)).contains("pliersss");
+            softly.assertThat(text).as("Card " + (i + 1)).contains("pliers");
         }
     }
 }
