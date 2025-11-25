@@ -1,4 +1,4 @@
-package Playwright.project.websites.ToolShop;
+package Playwright.project.websites.ToolShop.tests;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;

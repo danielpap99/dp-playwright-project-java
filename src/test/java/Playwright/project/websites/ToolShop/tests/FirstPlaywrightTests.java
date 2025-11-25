@@ -1,7 +1,10 @@
-package Playwright.project.websites.ToolShop;
+package Playwright.project.websites.ToolShop.tests;
 
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
+
+//this test class demonstrates how to set up a simple Playwright test from scratch
+//without using a Base class and pages
 
 public class FirstPlaywrightTests {
 
