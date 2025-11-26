@@ -5,13 +5,7 @@ target/
 .kotlin
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
+.idea/
 
 ### Eclipse ###
 .apt_generated
@@ -21,6 +15,9 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
+# Allure temporary/cache files
+.allure/
 
 ### NetBeans ###
 /nbproject/private/
@@ -42,3 +39,4 @@ token
 token.pub
 
 /target/
+node_modules/
