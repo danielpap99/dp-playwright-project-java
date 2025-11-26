@@ -2,8 +2,6 @@ package Playwright.project.websites.ToolShop.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,6 +16,7 @@ public class MainPage {
     private final Locator productName;
     private final Locator productImage;
     private final Locator productPrice;
+    private final Locator sortDropdown;
 
 
     // Constructor
@@ -31,6 +30,7 @@ public class MainPage {
         productName = page.getByTestId("product-name");
         productImage = page.locator(".card-img-top");
         productPrice = page.getByTestId("product-price");
+        sortDropdown = page.getByTestId("sort");
     }
 
     // Actions
@@ -43,19 +43,15 @@ public class MainPage {
         searchButton.click();
     }
 
+    public void selectSortOption(String sort) {
+        sortDropdown.selectOption(sort);
+    }
+
 
 
     //Assertions
-    public List<String> productNameText() {
-        page.waitForSelector(".card-title"); //wait until product names load
-        List<String> names = new ArrayList<>();
-        int count = productName.count();
-
-        for (int i = 0; i < count; i++) {
-            names.add(productName.nth(i).innerText().toLowerCase());
-        }
-
-        return names;
+    public List<String> productNames() {
+        return productName.allTextContents();
     }
 
     public List<String> productPrices() {
