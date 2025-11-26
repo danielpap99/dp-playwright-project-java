@@ -58,6 +58,10 @@ public class MainPage {
         removeButton(productName).click();
     }
 
+    public void openCart() {
+        shoppingCartIcon.click();
+    }
+
     // Assertions
     public int productCount() {
         return productItems.count();

@@ -24,4 +24,5 @@ before adding new ones.
   multiple actions.
 - New tests should be tagged one of 3 ways: Smoke, Stage 1, or Stage 2 depending on how much it would affect the business if this functionality
   was broken. Smoke = critical that must be fixed ASAP, Stage 1 = should be fixed ASAP but not critical, Stage 2 = not critical.
-
+- for the assertions always use assertThat and make sure you group them together using
+assertAll(()->...); when it makes sense.

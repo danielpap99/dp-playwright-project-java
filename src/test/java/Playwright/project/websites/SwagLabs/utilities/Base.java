@@ -27,7 +27,7 @@ public class Base {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setSlowMo(100)
+                        .setSlowMo(1000)
         );
 
         browserContext = browser.newContext(
