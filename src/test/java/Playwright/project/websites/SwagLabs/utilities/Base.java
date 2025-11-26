@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 import Playwright.project.websites.SwagLabs.pages.LoginPage;
 import Playwright.project.websites.SwagLabs.pages.MainPage;
 
-
+//Create browser context for each test, making them completely isolated to prevent interference
 public class Base {
 
     protected static Playwright playwright;
@@ -19,25 +19,22 @@ public class Base {
     protected LoginPage loginPage;
     protected MainPage mainPage;
 
-    @BeforeAll
-    public static void SetUpBrowser() {
+    @BeforeEach
+    public void setUp() {
         playwright = Playwright.create();
         playwright.selectors().setTestIdAttribute("data-test"); //configure getByTestId to use "data-test"
 
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setSlowMo(1000)
+                        .setSlowMo(100)
         );
 
         browserContext = browser.newContext(
                 new Browser.NewContextOptions()
                         .setViewportSize(1500, 955)
         );
-    }
 
-    @BeforeEach
-    public void setUp() {
         page = browserContext.newPage();
         page.navigate("https://www.saucedemo.com/");
         softly = new SoftAssertions();
@@ -52,12 +49,8 @@ public class Base {
     @AfterEach
     public void tearDownTest() {
         softly.assertAll();
-    }
-
-    @AfterAll
-    public static void tearDownClass() {
+        browserContext.close();
         browser.close();
         playwright.close();
     }
-
 }

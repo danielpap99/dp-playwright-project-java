@@ -2,6 +2,7 @@ package Playwright.project.websites.SwagLabs.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class CartPage {
 
@@ -57,6 +58,8 @@ public class CartPage {
 
     public void removeProductFromCart(String productName){
         itemRemoveButton(productName).click();
+        itemRemoveButton(productName).waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.DETACHED));
     }
 
 

@@ -5,7 +5,7 @@ import com.microsoft.playwright.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-
+//One shared browser context, making test execution faster
 public class Base {
 
     private static Playwright playwright;
