@@ -3,6 +3,7 @@ package Playwright.project.websites.ToolShop.utilities;
 import Playwright.project.websites.ClearFolderExtension;
 import Playwright.project.websites.ToolShop.pages.MainPage;
 import com.microsoft.playwright.*;
+import io.qameta.allure.Step;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -56,6 +57,7 @@ public class Base {
         playwright.close(); //shut down playwright instance
     }
 
+    @Step("Open contact page")
     public void goToContactPage() {
         mainPage.clickContactMenuOption();
     }

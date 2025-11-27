@@ -2,6 +2,7 @@ package Playwright.project.websites.ToolShop.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import io.qameta.allure.Step;
 
 import java.nio.file.Paths;
 
@@ -27,14 +28,17 @@ public class ContactPage {
     }
 
     // Actions
+    @Step("Select subject")
     public void selectDropdownOption(String option) {
         page.getByTestId("subject").selectOption(option);
     }
 
+    @Step("Attach a file")
     public void attachFile(String filePath) {
         attachment.setInputFiles(Paths.get(filePath));
     }
 
+    @Step("Click on Send button")
     public void clickSendButton() {
         sendButton.click();
     }
