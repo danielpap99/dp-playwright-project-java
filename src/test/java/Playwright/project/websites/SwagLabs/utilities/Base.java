@@ -1,12 +1,15 @@
 package Playwright.project.websites.SwagLabs.utilities;
 
+import Playwright.project.websites.ClearFolderExtension;
 import com.microsoft.playwright.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import Playwright.project.websites.SwagLabs.pages.LoginPage;
 import Playwright.project.websites.SwagLabs.pages.MainPage;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-//Create browser context for each test, making them completely isolated to prevent interference
+@ExtendWith(ClearFolderExtension.class) // this is for Allure to delete the results before each test run
+
 public class Base {
 
     protected static Playwright playwright;
@@ -19,7 +22,7 @@ public class Base {
     protected LoginPage loginPage;
     protected MainPage mainPage;
 
-    @BeforeEach
+    @BeforeEach //Create browser context for each test, making them completely isolated to prevent interference
     public void setUp() {
         playwright = Playwright.create();
         playwright.selectors().setTestIdAttribute("data-test"); //configure getByTestId to use "data-test"

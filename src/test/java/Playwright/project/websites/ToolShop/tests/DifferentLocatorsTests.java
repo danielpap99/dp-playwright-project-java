@@ -1,13 +1,16 @@
 package Playwright.project.websites.ToolShop.tests;
 
+import Playwright.project.websites.ClearFolderExtension;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
+@ExtendWith(ClearFolderExtension.class)
 
 public class DifferentLocatorsTests {
 

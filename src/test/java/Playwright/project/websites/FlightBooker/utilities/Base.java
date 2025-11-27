@@ -1,9 +1,12 @@
 package Playwright.project.websites.FlightBooker.utilities;
 
+import Playwright.project.websites.ClearFolderExtension;
 import Playwright.project.websites.FlightBooker.pages.FlightsPage;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
+@ExtendWith(ClearFolderExtension.class)
 
 public class Base {
 

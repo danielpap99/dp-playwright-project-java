@@ -41,7 +41,7 @@ public class MainPageProductsTests extends Base {
         List<String> productNames = mainPage.productNames();
 
         for (String name : productNames) {
-            softly.assertThat(name).contains("pliers");
+            softly.assertThat(name.toLowerCase()).contains("pliers");
         }
     }
 

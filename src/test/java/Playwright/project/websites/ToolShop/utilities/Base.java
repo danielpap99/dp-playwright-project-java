@@ -1,11 +1,14 @@
 package Playwright.project.websites.ToolShop.utilities;
 
+import Playwright.project.websites.ClearFolderExtension;
 import Playwright.project.websites.ToolShop.pages.MainPage;
 import com.microsoft.playwright.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-//One shared browser context, making test execution faster
+@ExtendWith(ClearFolderExtension.class)
+
 public class Base {
 
     private static Playwright playwright;
@@ -17,7 +20,7 @@ public class Base {
     // Pages that should be available in all tests
     protected MainPage mainPage;
 
-    @BeforeAll
+    @BeforeAll //One shared browser context, making test execution faster
     public static void SetUpBrowser() {
         playwright = Playwright.create();
         playwright.selectors().setTestIdAttribute("data-test"); //configure getByTestId to use "data-test"
