@@ -25,24 +25,24 @@ public class InventoryTests extends Base {
     void shoppingCartQuantityUpdatesCorrectly() {
         goToMainPage();
 
-        mainPage.addProductToCart("Sauce Labs Backpack");
+        mainPage.productCardComponent.addProductToCart("Sauce Labs Backpack");
         softly.assertThat(mainPage.shoppingCartQuantityText()).isEqualTo("1"); //soft assertions
 
-        mainPage.addProductToCart("Sauce Labs Bike Light");
+        mainPage.productCardComponent.addProductToCart("Sauce Labs Bike Light");
         softly.assertThat(mainPage.shoppingCartQuantityText()).isEqualTo("2");
 
-        mainPage.addProductToCart("Sauce Labs Onesie");
+        mainPage.productCardComponent.addProductToCart("Sauce Labs Onesie");
         softly.assertThat(mainPage.shoppingCartQuantityText()).isEqualTo("3");
 
-        mainPage.removeProductFromCart("Sauce Labs Backpack");
-        mainPage.removeProductFromCart("Sauce Labs Bike Light");
-        mainPage.removeProductFromCart("Sauce Labs Onesie");
+        mainPage.productCardComponent.removeProductFromCart("Sauce Labs Backpack");
+        mainPage.productCardComponent.removeProductFromCart("Sauce Labs Bike Light");
+        mainPage.productCardComponent.removeProductFromCart("Sauce Labs Onesie");
 
         assertAll(
                 () -> assertThat(mainPage.shoppingCartQuantityText()).isEqualTo(""),
-                () -> assertThat(mainPage.addToCartButtonVisible("Sauce Labs Backpack")).isTrue(),
-                () -> assertThat(mainPage.addToCartButtonVisible("Sauce Labs Bike Light")).isTrue(),
-                () -> assertThat(mainPage.addToCartButtonVisible("Sauce Labs Onesie")).isTrue()
+                () -> assertThat(mainPage.productCardComponent.addToCartButtonVisible("Sauce Labs Backpack")).isTrue(),
+                () -> assertThat(mainPage.productCardComponent.addToCartButtonVisible("Sauce Labs Bike Light")).isTrue(),
+                () -> assertThat(mainPage.productCardComponent.addToCartButtonVisible("Sauce Labs Onesie")).isTrue()
         );
     }
 

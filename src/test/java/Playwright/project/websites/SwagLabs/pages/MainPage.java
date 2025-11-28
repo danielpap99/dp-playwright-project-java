@@ -9,6 +9,7 @@ import java.util.List;
 public class MainPage {
 
     private final Page page;
+    public final ProductCardComponent productCardComponent;
 
     // Locators
     private final Locator shoppingCartIcon;
@@ -18,31 +19,26 @@ public class MainPage {
     private final Locator activeSortControl;
     private final Locator productName;
     private final Locator productPrice;
+    private final Locator checkoutButton;
 
 
     // Constructor
     public MainPage(Page page) {
         this.page = page;
+        this.productCardComponent = new ProductCardComponent(page);
 
-        shoppingCartIcon = page.locator("[data-test='shopping-cart-link']");
-        header = page.locator("[data-test='primary-header']");
-        productItems = page.locator("[data-test='inventory-item']");
-        sortControl = page.locator("[data-test='product-sort-container']");
-        activeSortControl = page.locator("[data-test='active-option']");
-        productName = page.locator("[data-test='inventory-item-name']");
-        productPrice = page.locator("[data-test='inventory-item-price']");
+        shoppingCartIcon = page.getByTestId("shopping-cart-link");
+        header = page.getByTestId("primary-header");
+        productItems = page.getByTestId("inventory-item");
+        sortControl = page.getByTestId("product-sort-container");
+        activeSortControl = page.getByTestId("active-option");
+        productName = page.getByTestId("inventory-item-name");
+        productPrice = page.getByTestId("inventory-item-price");
+        checkoutButton = page.getByTestId("checkout");
     }
 
     // Dynamic locators
-    public Locator addToCartButton(String productName) {
-        String product = productName.toLowerCase().replace(" ", "-");
-        return page.locator("[data-test='add-to-cart-" + product + "']");
-    }
 
-    public Locator removeButton(String productName) {
-        String product = productName.toLowerCase().replace(" ", "-");
-        return page.locator("[data-test='remove-" + product + "']");
-    }
 
     // Actions
     public void selectSortOption(String sort) {
@@ -50,16 +46,12 @@ public class MainPage {
         page.waitForLoadState(LoadState.NETWORKIDLE);
     }
 
-    public void addProductToCart(String productName) {
-        addToCartButton(productName).click();
-    }
-
-    public void removeProductFromCart(String productName) {
-        removeButton(productName).click();
-    }
-
     public void openCart() {
         shoppingCartIcon.click();
+    }
+
+    public void clickCheckoutButton() {
+        checkoutButton.click();
     }
 
     // Assertions
@@ -106,10 +98,4 @@ public class MainPage {
     public String shoppingCartQuantityText() {
         return shoppingCartIcon.textContent();
     }
-
-    public boolean addToCartButtonVisible(String productName) {
-        String product = productName.toLowerCase().replace(" ", "-");
-        return addToCartButton(product).isVisible();
-    }
-
 }

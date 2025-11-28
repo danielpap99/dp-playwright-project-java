@@ -27,24 +27,24 @@ public class ShoppingCartTests extends Base {
         String backpack = "Sauce Labs Backpack";
         String bikeLight = "Sauce Labs Bike Light";
 
-        mainPage.addProductToCart(backpack);
-        mainPage.addProductToCart(bikeLight);
+        mainPage.productCardComponent.addProductToCart(backpack);
+        mainPage.productCardComponent.addProductToCart(bikeLight);
         mainPage.openCart();
 
         assertAll(
-                () -> assertThat(cartPage.itemQuantityText(backpack)).isEqualTo("1"),
-                () -> assertThat(cartPage.itemNameText(backpack)).isEqualTo(backpack),
-                () -> assertThat(cartPage.itemDescriptionText(backpack)).contains("carry.allTheThings()"),
-                () -> assertThat(cartPage.itemPriceText(backpack)).isEqualTo("$29.99"),
-                () -> assertThat(cartPage.removeButtonVisible(backpack)).isTrue()
+                () -> assertThat(cartPage.productCardComponent.itemQuantityText(backpack)).isEqualTo("1"),
+                () -> assertThat(cartPage.productCardComponent.productNameText(backpack)).isEqualTo(backpack),
+                () -> assertThat(cartPage.productCardComponent.itemDescriptionText(backpack)).contains("carry.allTheThings()"),
+                () -> assertThat(cartPage.productCardComponent.productPriceText(backpack)).isEqualTo("$29.99"),
+                () -> assertThat(cartPage.productCardComponent.removeButtonVisible(backpack)).isTrue()
         );
 
         assertAll(
-                () -> assertThat(cartPage.itemQuantityText(bikeLight)).isEqualTo("1"),
-                () -> assertThat(cartPage.itemNameText(bikeLight)).isEqualTo(bikeLight),
-                () -> assertThat(cartPage.itemDescriptionText(bikeLight)).contains("Water-resistant"),
-                () -> assertThat(cartPage.itemPriceText(bikeLight)).isEqualTo("$9.99"),
-                () -> assertThat(cartPage.removeButtonVisible(bikeLight)).isTrue()
+                () -> assertThat(cartPage.productCardComponent.itemQuantityText(bikeLight)).isEqualTo("1"),
+                () -> assertThat(cartPage.productCardComponent.productNameText(bikeLight)).isEqualTo(bikeLight),
+                () -> assertThat(cartPage.productCardComponent.itemDescriptionText(bikeLight)).contains("Water-resistant"),
+                () -> assertThat(cartPage.productCardComponent.productPriceText(bikeLight)).isEqualTo("$9.99"),
+                () -> assertThat(cartPage.productCardComponent.removeButtonVisible(bikeLight)).isTrue()
         );
     }
 
@@ -56,13 +56,13 @@ public class ShoppingCartTests extends Base {
         String backpack = "Sauce Labs Backpack";
         String bikeLight = "Sauce Labs Bike Light";
 
-        mainPage.addProductToCart(backpack);
-        mainPage.addProductToCart(bikeLight);
+        mainPage.productCardComponent.addProductToCart(backpack);
+        mainPage.productCardComponent.addProductToCart(bikeLight);
         mainPage.openCart();
 
-        cartPage.removeProductFromCart(backpack);
+        cartPage.productCardComponent.removeProductFromCart(backpack);
 
-        assertThat(cartPage.productCardIsVisible(backpack)).isFalse();
+        assertThat(cartPage.productCardComponent.productCardIsVisible(backpack)).isFalse();
     }
 
     @Test
@@ -72,10 +72,10 @@ public class ShoppingCartTests extends Base {
 
         String backpack = "Sauce Labs Backpack";
 
-        mainPage.addProductToCart(backpack);
+        mainPage.productCardComponent.addProductToCart(backpack);
         mainPage.openCart();
 
-        cartPage.clickProductLink(backpack);
+        cartPage.productCardComponent.clickProductLink(backpack);
 
         assertThat(productPage.productPageUrl()).contains("inventory-item.html");
         assertThat(productPage.itemNameText()).isEqualTo(backpack);
