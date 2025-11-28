@@ -6,6 +6,7 @@ import Playwright.project.websites.SwagLabs.pages.CartPage;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 public class OrderFlowTests extends Base {
 
@@ -48,10 +49,12 @@ public class OrderFlowTests extends Base {
         checkoutPage.enterPersonalDetails("Daniel", "Papadopoulous", "M20");
         checkoutPage.clickContinueButton();
 
-        assertThat(checkoutPage.productCardComponent.productNameText(backpack)).isEqualTo(backpack);
-        assertThat(checkoutPage.productCardComponent.productNameText(onesie)).isEqualTo(onesie);
-        assertThat(checkoutPage.productCardComponent.productPriceText(backpack)).isEqualTo(backpackPrice);
-        assertThat(checkoutPage.productCardComponent.productPriceText(onesie)).isEqualTo(onesiePrice);
+        assertAll(
+                () -> assertThat(checkoutPage.productCardComponent.productNameText(backpack)).isEqualTo(backpack),
+                () -> assertThat(checkoutPage.productCardComponent.productNameText(onesie)).isEqualTo(onesie),
+                () -> assertThat(checkoutPage.productCardComponent.productPriceText(backpack)).isEqualTo(backpackPrice),
+                () -> assertThat(checkoutPage.productCardComponent.productPriceText(onesie)).isEqualTo(onesiePrice)
+        );
     }
 
     @Test
@@ -73,20 +76,28 @@ public class OrderFlowTests extends Base {
         checkoutPage.enterPersonalDetails("Daniel", "Papadopoulous", "M20");
         checkoutPage.clickContinueButton();
 
-
         assertThat(checkoutPage.subtotalText()).isEqualTo("Item total: $" + subtotal);
     }
 
     @Test
-    @Tag("Smoke")
+    @Tag("Stage1")
     void orderCanBePlaced() {
         goToMainPage();
 
         mainPage.productCardComponent.addProductToCart("Sauce Labs Backpack");
         mainPage.openCart();
         mainPage.clickCheckoutButton();
+        checkoutPage.enterPersonalDetails("Daniel", "Papadopoulous", "M20");
+        checkoutPage.clickContinueButton();
+        checkoutPage.clickFinishButton();
 
-        assertThat(checkoutPage.checkoutPageLoads()).isTrue();
+        assertAll(
+                () -> assertThat(checkoutPage.orderPlacedTitleText()).isEqualTo("Thank you for your order!"),
+                () -> assertThat(checkoutPage.orderPlacedMessageText()).isEqualTo("Your order has been dispatched, and will arrive just as fast as the pony can get there!")
+        );
+
+        checkoutPage.clickBackHomeButton();
+
+        assertThat(mainPage.isOnInventoryPage()).isTrue();
     }
-
 }

@@ -15,8 +15,10 @@ public class CheckoutPage {
     private final Locator postcodeField;
     private final Locator continueButton;
     private final Locator subtotal;
-
-
+    private final Locator finishButton;
+    private final Locator orderPlacedTitle;
+    private final Locator orderPlacedMessage;
+    private final Locator backHomeButton;
 
     // Constructor
     public CheckoutPage(Page page) {
@@ -28,6 +30,10 @@ public class CheckoutPage {
         postcodeField = page.getByTestId("postalCode");
         continueButton = page.getByTestId("continue");
         subtotal = page.getByTestId("subtotal-label");
+        finishButton = page.getByTestId("finish");
+        orderPlacedTitle = page.getByTestId("complete-header");
+        orderPlacedMessage = page.getByTestId("complete-text");
+        backHomeButton = page.getByTestId("back-to-products");
     }
 
     // Dynamic locators
@@ -56,6 +62,13 @@ public class CheckoutPage {
         enterPostcode(postcode);
     }
 
+    public void clickFinishButton() {
+        finishButton.click();
+    }
+
+    public void clickBackHomeButton() {
+        backHomeButton.click();
+    }
 
 
     // Assertions
@@ -68,5 +81,13 @@ public class CheckoutPage {
 
     public String subtotalText() {
         return subtotal.textContent();
+    }
+
+    public String orderPlacedTitleText() {
+        return orderPlacedTitle.textContent();
+    }
+
+    public String orderPlacedMessageText() {
+        return orderPlacedMessage.textContent();
     }
 }
