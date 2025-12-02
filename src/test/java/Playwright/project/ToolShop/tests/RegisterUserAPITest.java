@@ -56,10 +56,30 @@ public class RegisterUserAPITest {
 
         assertAll(
                 () -> assertThat(response.status()).isEqualTo(201),
-                () -> assertThat(createdUser).isEqualTo(validUser.withPassword(null)), // password should not show
+                () -> assertThat(createdUser).isEqualTo(validUser.withPassword(null)), // created user matches specified user without password
                 () -> assertThat(responseObject.has("password")).isFalse(), // should not contain password in response
                 () -> assertThat(responseObject.get("id").getAsString()).isNotEmpty(), // registered user should have an id
                 () -> assertThat(response.headers().get("content-type")).contains("application/json")
+        );
+    }
+
+    @Test
+    void firstNameIsMandatory() {
+        User newUserWithNoName = User.randomUser().withoutFirstName();
+
+        var response = request.post("/users/register",
+                RequestOptions.create()
+                        .setHeader("Content-Type", "application/json")
+                        .setData(newUserWithNoName)
+        );
+
+        JsonObject responseObject = gson.fromJson(response.text(), JsonObject.class);
+        String errorMessage = responseObject.get("first_name").getAsString();
+
+        assertAll(
+                () -> assertThat(response.status()).isEqualTo(422),
+                () -> assertThat(responseObject.has("first_name")).isTrue(),
+                () -> assertThat(errorMessage).isEqualTo("The first name field is required.")
         );
     }
 }

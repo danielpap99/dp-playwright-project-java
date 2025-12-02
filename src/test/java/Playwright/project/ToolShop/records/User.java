@@ -58,4 +58,15 @@ public record User(
                 password,
                 email);
     }
+
+    public User withoutFirstName() {
+        return new User(
+                null,
+                last_name,
+                address,
+                phone,
+                dob,
+                password,
+                email);
+    }
 }
