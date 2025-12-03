@@ -2,6 +2,8 @@ package Playwright.project.ToolShop.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.WaitForSelectorState;
+
 import java.util.List;
 
 
@@ -17,6 +19,7 @@ public class MainPage {
     private final Locator productImage;
     private final Locator productPrice;
     private final Locator sortDropdown;
+    private final Locator signInButton;
 
 
     // Constructor
@@ -31,6 +34,7 @@ public class MainPage {
         productImage = page.locator(".card-img-top");
         productPrice = page.getByTestId("product-price");
         sortDropdown = page.getByTestId("sort");
+        signInButton = page.getByTestId("nav-sign-in");
     }
 
     // Actions
@@ -47,6 +51,9 @@ public class MainPage {
         sortDropdown.selectOption(sort);
     }
 
+    public void navigateToSignInPage() {
+        signInButton.click();
+    }
 
 
     //Assertions
@@ -67,4 +74,8 @@ public class MainPage {
                 .toList();
     }
 
+    public boolean userIsLoggedIn() {
+        signInButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
+        return page.url().equals("https://practicesoftwaretesting.com/account");
+    }
 }

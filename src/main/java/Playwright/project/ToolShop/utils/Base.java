@@ -1,5 +1,6 @@
 package Playwright.project.ToolShop.utils;
 
+import Playwright.project.ToolShop.pages.LoginPage;
 import Playwright.project.ToolShop.pages.MainPage;
 import com.microsoft.playwright.*;
 
@@ -8,11 +9,12 @@ public class Base {
 
     private static Playwright playwright;
     private static Browser browser;
-    private static BrowserContext browserContext;
+    protected static BrowserContext browserContext;
     protected Page page;
 
     // Pages that should be available in all tests
     protected MainPage mainPage;
+    protected LoginPage loginPage;
 
     //One shared browser context, making test execution faster
     public static void setUpBrowser() {
@@ -35,6 +37,7 @@ public class Base {
         page = browserContext.newPage();
         page.navigate("https://practicesoftwaretesting.com/");
         mainPage = new MainPage(page);
+        loginPage = new LoginPage(page);
     }
 
     public static void tearDown() {

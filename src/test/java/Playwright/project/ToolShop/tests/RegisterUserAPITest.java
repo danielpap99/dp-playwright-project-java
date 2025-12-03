@@ -38,6 +38,7 @@ public class RegisterUserAPITest {
         if (request != null) {
             request.dispose();
         }
+        softly.assertAll();
     }
 
     @Test
