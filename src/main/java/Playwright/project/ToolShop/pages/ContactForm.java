@@ -4,7 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import java.nio.file.Paths;
 
-public class ContactPage {
+public class ContactForm {
 
     private final Page page;
 
@@ -15,7 +15,7 @@ public class ContactPage {
     private final Locator attachmentError;
 
     // Constructor
-    public ContactPage(Page page) {
+    public ContactForm(Page page) {
 
         this.page = page;
 

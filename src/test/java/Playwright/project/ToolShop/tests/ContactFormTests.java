@@ -1,7 +1,7 @@
 package Playwright.project.ToolShop.tests;
 
 import Playwright.project.ToolShop.base.TestBase;
-import Playwright.project.ToolShop.pages.ContactPage;
+import Playwright.project.ToolShop.pages.ContactForm;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
@@ -13,40 +13,40 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Feature("Product Catalog")
 public class ContactFormTests extends TestBase {
 
-    private ContactPage contactPage;
+    private ContactForm contactForm;
 
     @BeforeEach
     void initPage() {
-        contactPage = new ContactPage(page);
+        contactForm = new ContactForm(page);
     }
 
     @Test
     @Story("Selecting query subject")
     void subjectCanBeSelected() {
         goToContactPage();
-        contactPage.selectDropdownOption("warranty");
+        contactForm.selectDropdownOption("warranty");
 
-        assertThat(contactPage.subjectDropdownValue()).isEqualTo("warranty");
+        assertThat(contactForm.subjectDropdownValue()).isEqualTo("warranty");
     }
 
     @Test
     @Story("Attaching a text file")
     void txtFileCanBeAttached() {
         goToContactPage();
-        contactPage.attachFile("src/test/resources/data/testdata.txt");
+        contactForm.attachFile("src/test/resources/data/testdata.txt");
 
-        assertThat(contactPage.attachmentValue()).endsWith("testdata.txt");
+        assertThat(contactForm.attachmentValue()).endsWith("testdata.txt");
     }
 
     @Test
     @Story("Text file size validation")
     void txtFileSizeIsTooLarge() {
         goToContactPage();
-        contactPage.attachFile("src/test/resources/data/testdata.txt");
+        contactForm.attachFile("src/test/resources/data/testdata.txt");
 
-        assertThat(contactPage.attachmentValue()).endsWith("testdata.txt");
+        assertThat(contactForm.attachmentValue()).endsWith("testdata.txt");
 
-        contactPage.clickSendButton();
-        assertThat(contactPage.attachmentSizeErrorMessageAppears()).isTrue();
+        contactForm.clickSendButton();
+        assertThat(contactForm.attachmentSizeErrorMessageAppears()).isTrue();
     }
 }
