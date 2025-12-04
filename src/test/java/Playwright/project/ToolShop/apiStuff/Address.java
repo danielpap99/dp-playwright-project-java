@@ -1,4 +1,4 @@
-package Playwright.project.ToolShop.records;
+package Playwright.project.ToolShop.apiStuff;
 
 public record Address(String street,
                       String city,

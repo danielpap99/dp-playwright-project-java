@@ -27,9 +27,25 @@ public class MainPageProductsTests extends TestBase {
     @Test
     @Tag("Stage2")
     void productImagesAreDisplayed() {
-        List<String> productImageTitles = mainPage.productImageTitles();
+        softly.assertThat(mainPage.productImageTitles()).isNotEmpty();
+    }
 
-        softly.assertThat(productImageTitles).isNotEmpty();
+    @Test
+    void pageTitleIsShown() {
+        String title = page.title();
+
+        assertThat(title).contains("Practice Software Testing");
+    }
+
+    @Test
+    void searchingForSpecificProductWorksCorrectly() {
+        mainPage.searchForProduct("Combination pliers");
+
+        assertAll(
+                () -> assertThat(mainPage.searchCaptionText()).contains("Searched for: Combination pliers"),
+                () -> assertThat(mainPage.productNames()).contains(" Combination Pliers "),
+                () -> assertThat(mainPage.searchResultCount()).isEqualTo(1)
+        );
     }
 
     @Test

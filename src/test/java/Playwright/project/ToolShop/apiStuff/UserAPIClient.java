@@ -1,6 +1,5 @@
-package Playwright.project.ToolShop;
+package Playwright.project.ToolShop.apiStuff;
 
-import Playwright.project.ToolShop.records.User;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.RequestOptions;
 

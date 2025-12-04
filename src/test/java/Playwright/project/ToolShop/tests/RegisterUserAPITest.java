@@ -1,6 +1,6 @@
 package Playwright.project.ToolShop.tests;
 
-import Playwright.project.ToolShop.records.User;
+import Playwright.project.ToolShop.apiStuff.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.microsoft.playwright.APIRequest;

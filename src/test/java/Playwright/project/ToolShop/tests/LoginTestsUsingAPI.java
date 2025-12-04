@@ -1,9 +1,8 @@
 package Playwright.project.ToolShop.tests;
 
-import Playwright.project.ToolShop.UserAPIClient;
+import Playwright.project.ToolShop.apiStuff.UserAPIClient;
 import Playwright.project.ToolShop.base.TestBase;
-import Playwright.project.ToolShop.records.User;
-import com.microsoft.playwright.*;
+import Playwright.project.ToolShop.apiStuff.User;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +17,7 @@ public class LoginTestsUsingAPI extends TestBase {
         String email = user.email();
         String password = user.password();
 
-        mainPage.navigateToSignInPage();
+        goToSignInPage();
         loginPage.login(email, password);
 
         assertThat(mainPage.userIsLoggedIn()).isTrue();

@@ -12,7 +12,6 @@ public class MainPage {
     private final Page page;
 
     // Locators
-    private final Locator contactMenuOption;
     private final Locator searchField;
     private final Locator searchButton;
     private final Locator productName;
@@ -20,6 +19,8 @@ public class MainPage {
     private final Locator productPrice;
     private final Locator sortDropdown;
     private final Locator signInButton;
+    private final Locator searchCaption;
+    public final Locator searchResults;
 
 
     // Constructor
@@ -27,7 +28,6 @@ public class MainPage {
 
         this.page = page;
 
-        contactMenuOption = page.getByTestId("nav-contact");
         searchField = page.getByTestId("search-query");
         searchButton = page.getByTestId("search-submit");
         productName = page.getByTestId("product-name");
@@ -35,13 +35,11 @@ public class MainPage {
         productPrice = page.getByTestId("product-price");
         sortDropdown = page.getByTestId("sort");
         signInButton = page.getByTestId("nav-sign-in");
+        searchCaption = page.getByTestId("search-caption");
+        searchResults = page.locator(".card");
     }
 
     // Actions
-    public void clickContactMenuOption() {
-        contactMenuOption.click();
-    }
-
     public void searchForProduct(String productName) {
         searchField.fill(productName);
         searchButton.click();
@@ -49,10 +47,6 @@ public class MainPage {
 
     public void selectSortOption(String sort) {
         sortDropdown.selectOption(sort);
-    }
-
-    public void navigateToSignInPage() {
-        signInButton.click();
     }
 
 
@@ -77,5 +71,13 @@ public class MainPage {
     public boolean userIsLoggedIn() {
         signInButton.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
         return page.url().equals("https://practicesoftwaretesting.com/account");
+    }
+
+    public String searchCaptionText() {
+        return searchCaption.textContent();
+    }
+
+    public int searchResultCount() {
+        return searchResults.count();
     }
 }

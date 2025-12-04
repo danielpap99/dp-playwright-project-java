@@ -2,6 +2,7 @@ package Playwright.project.ToolShop.utils;
 
 import Playwright.project.ToolShop.pages.LoginPage;
 import Playwright.project.ToolShop.pages.MainPage;
+import Playwright.project.ToolShop.components.MenuBar;
 import com.microsoft.playwright.*;
 
 
@@ -15,6 +16,7 @@ public class Base {
     // Pages that should be available in all tests
     protected MainPage mainPage;
     protected LoginPage loginPage;
+    protected MenuBar menuBar;
 
     //One shared browser context, making test execution faster
     public static void setUpBrowser() {
@@ -38,6 +40,7 @@ public class Base {
         page.navigate("https://practicesoftwaretesting.com/");
         mainPage = new MainPage(page);
         loginPage = new LoginPage(page);
+        menuBar = new MenuBar(page);
     }
 
     public static void tearDown() {
@@ -46,6 +49,10 @@ public class Base {
     }
 
     public void goToContactPage() {
-        mainPage.clickContactMenuOption();
+        menuBar.navigateToContactPage();
+    }
+
+    public void goToSignInPage() {
+        menuBar.navigateToSignInPage();
     }
 }
