@@ -14,11 +14,15 @@ This repository contains automated test scripts written in Java using Playwright
 This project serves as a personal practice suite to enhance my automation skills, including:
 
 - Writing clean, maintainable tests using POM
+- Using Base classes
 - Utilising assertThat for easy-to-read, concise assertions
 - Exploring API testing in general and using APIs to speed up tests
 - Practicing a variety of Playwright commands for interacting with web elements
 
 ## Notes
 
+- This project uses 3 different websites, each with different functionalities and interactions
+- They are each organised into pages, components, tests, Base & TestBase class
+  
 This project is a work in progress, focused on learning and exploring different techniques
 Feel free to reach out if you have any comments or suggestions, constructive criticism always welcome
