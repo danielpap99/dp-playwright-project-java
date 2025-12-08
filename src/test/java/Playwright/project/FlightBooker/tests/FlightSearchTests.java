@@ -36,4 +36,29 @@ public class FlightSearchTests extends TestBase {
 
         assertThat(flightsPage.searchComponent.arrivalCityFieldText()).isEqualTo("Delhi (DEL)");
     }
+
+    @Test
+    @Tag("Stage1")
+    void roundTripCanBeSelected() {
+        flightsPage.searchComponent.selectRoundTrip();
+
+        assertThat(flightsPage.searchComponent.clearReturnDateIsVisible()).isTrue();
+    }
+
+    @Test
+    @Tag("Stage2")
+    void multicityCanBeSelected() {
+        flightsPage.searchComponent.selectMulticity();
+
+        assertAll(
+                () -> assertThat(flightsPage.searchComponent.multiCityWarningMessageIsVisible()).isTrue(),
+                () -> assertThat(flightsPage.searchComponent.multiCityWarningMessageText()).contains("Multicity booking does not mean connecting flight.")
+        );
+
+        flightsPage.searchComponent.closeMultiCityWarningMessage();
+
+        assertThat(flightsPage.searchComponent.multiCityWarningMessageIsVisible()).isFalse();
+        assertThat(flightsPage.searchComponent.multipleDepartureCitiesAreVisible()).isTrue();
+        //assertThat(flightsPage.searchComponent.multipleDepartDatePickersAreVisible()).isTrue();
+    }
 }
