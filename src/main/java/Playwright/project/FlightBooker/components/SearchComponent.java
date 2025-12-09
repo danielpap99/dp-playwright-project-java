@@ -34,7 +34,6 @@ public class SearchComponent {
         arrivalCityField1 = page.locator("#ctl00_mainContent_ddl_destinationStation1_CTXT");
         arrivalCityField2 = page.locator("#ctl00_mainContent_ddl_destinationStation2_CTXT");
         arrivalCityField3 = page.locator("#ctl00_mainContent_ddl_destinationStation3_CTXT");
-
         submitButton = page.locator("#ctl00_mainContent_btn_FindFlights");
         roundTripRadioButton = page.locator("#ctl00_mainContent_rbtnl_Trip_1");
         clearReturnDate = page.locator("#spclearDate");
@@ -99,10 +98,10 @@ public class SearchComponent {
                 && arrivalCityField3.isVisible();
     }
 
-    public boolean multipleDepartDatePickersAreVisible() {
+    public boolean multiDatePickersAreVisible() {
         return departureDatePicker(1).isVisible()
-                && departureDatePicker(2).isVisible()
-                && departureDatePicker(3).isVisible();
+                && departureDatePicker(3).isVisible()
+                && departureDatePicker(4).isVisible();
     }
 
     public boolean submitButtonIsVisible() {

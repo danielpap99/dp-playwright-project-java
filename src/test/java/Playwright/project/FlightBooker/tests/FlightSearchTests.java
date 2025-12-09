@@ -57,8 +57,11 @@ public class FlightSearchTests extends TestBase {
 
         flightsPage.searchComponent.closeMultiCityWarningMessage();
 
-        assertThat(flightsPage.searchComponent.multiCityWarningMessageIsVisible()).isFalse();
-        assertThat(flightsPage.searchComponent.multipleDepartureCitiesAreVisible()).isTrue();
-        //assertThat(flightsPage.searchComponent.multipleDepartDatePickersAreVisible()).isTrue();
+        assertAll(
+                () -> assertThat(flightsPage.searchComponent.multiCityWarningMessageIsVisible()).isFalse(),
+                () -> assertThat(flightsPage.searchComponent.multipleDepartureCitiesAreVisible()).isTrue(),
+                () -> assertThat(flightsPage.searchComponent.multiDatePickersAreVisible()).isTrue()
+        );
+
     }
 }
